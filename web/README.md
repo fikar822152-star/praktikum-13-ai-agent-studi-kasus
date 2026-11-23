@@ -53,6 +53,22 @@ Mesin uji: RAM 8 GB, CPU 4 core, GPU Intel HD (shared), tanpa CUDA. Inferensi be
 
 > Tutup aplikasi berat (browser banyak tab, OneDrive syncing) sebelum menjalankan model. Tanpa GPU NVIDIA, kecepatan 1.5B sekitar 10–20 token/detik dan 3B sekitar 5–10 token/detik — cukup untuk tugas draft, bukan percakapan panjang.
 
+### Skrip setup otomatis
+
+Setelah Ollama terpasang, dari folder `web/`:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup-ollama.ps1
+```
+
+Skrip akan mengecek instalasi, menyalakan service, mengunduh `qwen2.5:1.5b`, dan menampilkan konfigurasi `.env` yang benar.
+
+Untuk model lain:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\setup-ollama.ps1 -Model qwen2.5:3b
+```
+
 ---
 
 ## 3. Menjalankan

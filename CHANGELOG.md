@@ -2,6 +2,12 @@
 
 Semua perubahan signifikan dicatat di file ini.
 
+## [1.3.1] - 2026-11-23
+
+### Added
+- Skrip `web/setup-ollama.ps1` untuk cek instalasi, menyalakan service, dan mengunduh model.
+- Panduan model lokal untuk RAM 8 GB di `web/README.md`.
+
 ## [1.3.0] - 2026-11-23
 
 ### Changed
