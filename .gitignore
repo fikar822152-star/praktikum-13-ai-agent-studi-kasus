@@ -1,2 +1,9 @@
 # Folder skill hasil instalasi lokal (salinan dari skills/)
 .opencode/
+
+# Rahasia konfigurasi web (API key)
+web/.env
+
+# Log & cache
+*.log
+node_modules/

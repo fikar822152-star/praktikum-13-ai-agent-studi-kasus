@@ -97,6 +97,12 @@ praktikum-13-ai-agent-studi-kasus/
 │           ├── template-pengesahan-dokumen.md
 │           ├── template-memo-analisis-kredit.md
 │           └── contoh-penggunaan.md
+├── web/                                # Web AI Agent (opsional)
+│   ├── server.js                       # Server Node.js tanpa dependency
+│   ├── public/                         # UI chat (HTML/CSS/JS)
+│   ├── .env.example                    # Contoh konfigurasi API key
+│   ├── start.bat                       # Jalankan sekali klik (Windows)
+│   └── README.md                       # Panduan mode web
 └── CHANGELOG.md
 ```
 
@@ -163,7 +169,24 @@ Detail: [`docs/etika-dan-batasan.md`](docs/etika-dan-batasan.md).
 
 ---
 
-## 9. Catatan
+## 9. Mode Web — AI Agent Siap Pakai (Opsional)
+
+Selain dipakai sebagai *skill* di OpenCode/Claude Code, repository ini menyertakan **aplikasi web chat** yang menjalankan kelima skill.
+
+```powershell
+cd web
+Copy-Item .env.example .env   # lalu isi LLM_API_KEY
+node server.js                # buka http://localhost:4173
+```
+
+- Tanpa `npm install` — hanya Node.js 18+.
+- Mendukung penyedia apa pun yang kompatibel OpenAI (OpenAI, DeepSeek, OpenRouter, Groq, Ollama).
+- API key disimpan di server (`web/.env`), tidak pernah dikirim ke browser.
+- Panduan lengkap: [`web/README.md`](web/README.md).
+
+---
+
+## 10. Catatan
 
 - Identitas pada tabel atas sudah lengkap (nama, NIM, mata kuliah, dan dosen pengampu).
 - Seluruh konten dibuat sebagai artefak pembelajaran; tidak mengandung data pribadi nyata.

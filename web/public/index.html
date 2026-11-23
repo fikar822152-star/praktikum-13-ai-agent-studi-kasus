@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Agent — Praktikum #13</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">AI</div>
+          <div>
+            <strong>AI Agent</strong>
+            <span>Praktikum #13</span>
+          </div>
+        </div>
+
+        <p class="sidebar-label">Pilih agent</p>
+        <nav id="skillList" class="skill-list" aria-label="Daftar AI Agent"></nav>
+
+        <div class="sidebar-footer">
+          <div id="status" class="status">Memeriksa konfigurasi…</div>
+          <p class="credit">Ahmad Zulfikar · C1D124022</p>
+        </div>
+      </aside>
+
+      <main class="chat">
+        <header class="chat-header">
+          <div>
+            <h1 id="skillTitle">Memuat…</h1>
+            <p id="skillDesc"></p>
+          </div>
+          <button id="resetBtn" class="ghost" type="button" title="Mulai percakapan baru">
+            Percakapan baru
+          </button>
+        </header>
+
+        <div class="notice">
+          Semua keluaran AI adalah <strong>DRAFT</strong>. Verifikasi manusia tetap wajib —
+          AI tidak mengambil keputusan final (diagnosis, kredit, tanda tangan, dsb.).
+        </div>
+
+        <div id="messages" class="messages" aria-live="polite"></div>
+
+        <div id="examples" class="examples"></div>
+
+        <form id="chatForm" class="composer">
+          <textarea
+            id="input"
+            rows="1"
+            placeholder="Tulis instruksi… (Enter kirim, Shift+Enter baris baru)"
+            required
+          ></textarea>
+          <button id="sendBtn" type="submit">Kirim</button>
+        </form>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

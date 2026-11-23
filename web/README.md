@@ -1,0 +1,114 @@
+# Web AI Agent — Praktikum #13
+
+Aplikasi web chat untuk menjalankan kelima **AI Agent Skill** dari folder `../skills/`.
+Dibuat dengan **Node.js murni tanpa dependency** — tidak perlu `npm install`.
+
+---
+
+## 1. Persyaratan
+
+- **Node.js 18+** (sudah tersedia: v26)
+- API key dari penyedia LLM yang kompatibel dengan format OpenAI
+
+---
+
+## 2. Konfigurasi
+
+1. Salin `.env.example` menjadi `.env`:
+
+   ```powershell
+   Copy-Item .env.example .env
+   ```
+
+2. Buka `.env` dan isi minimal:
+
+   ```env
+   LLM_API_KEY=sk-xxxxxxxxxxxxxxxx
+   LLM_BASE_URL=https://api.openai.com/v1
+   LLM_MODEL=gpt-4o-mini
+   ```
+
+3. Sesuaikan penyedia bila bukan OpenAI:
+
+   | Penyedia | `LLM_BASE_URL` | Contoh `LLM_MODEL` |
+   | --- | --- | --- |
+   | OpenAI | `https://api.openai.com/v1` | `gpt-4o-mini` |
+   | DeepSeek | `https://api.deepseek.com/v1` | `deepseek-chat` |
+   | OpenRouter | `https://openrouter.ai/api/v1` | `openai/gpt-4o-mini` |
+   | Groq | `https://api.groq.com/openai/v1` | `llama-3.3-70b-versatile` |
+   | Ollama (lokal) | `http://127.0.0.1:11434/v1` | `qwen2.5:7b` (API key boleh `ollama`) |
+
+> Jangan pernah commit file `.env`. File `web/.env` sudah diabaikan oleh `.gitignore` di root repository.
+
+---
+
+## 3. Menjalankan
+
+Dari folder `web/`:
+
+```powershell
+node server.js
+```
+
+Atau klik dua kali `start.bat`.
+
+Server berjalan di **http://localhost:4173** dan browser akan terbuka otomatis.
+
+Jika port dipakai:
+
+```powershell
+$env:PORT=4174; node server.js
+```
+
+---
+
+## 4. Cara Menggunakan
+
+1. Pilih agent di sidebar (5 pilihan).
+2. Klik salah satu contoh prompt, atau tulis instruksi sendiri.
+3. Tekan **Enter** untuk mengirim, **Shift+Enter** untuk baris baru.
+4. Hasil berlabel **DRAFT** — verifikasi tetap wajib.
+5. Tombol **Salin** menyalin jawaban mentah (format Markdown).
+
+---
+
+## 5. Arsitektur
+
+```
+Browser (index.html + app.js + style.css)
+        │  POST /api/chat { skillId, messages }
+        ▼
+server.js (Node http)
+        │  1. muat SKILL.md dari ../skills/<id>/SKILL.md
+        │  2. jadikan isi SKILL.md sebagai system prompt
+        │  3. teruskan ke LLM (OpenAI-compatible)
+        ▼
+Penyedia LLM → jawaban → browser
+```
+
+- API key **hanya** disimpan di server (`.env`), tidak dikirim ke browser.
+- Server mengikat `127.0.0.1` (hanya lokal).
+- Tidak ada data yang disimpan ke disk; riwayat chat ada di memori browser.
+
+---
+
+## 6. Endpoint
+
+| Method | Path | Keterangan |
+| --- | --- | --- |
+| `GET` | `/api/health` | Status konfigurasi, model, jumlah skill |
+| `GET` | `/api/skills` | Daftar skill (id, name, description, references) |
+| `POST` | `/api/chat` | `{ skillId, messages: [{role, content}] }` |
+
+---
+
+## 7. Troubleshooting
+
+| Masalah | Solusi |
+| --- | --- |
+| `API key belum dikonfigurasi` | Isi `web/.env`, restart server |
+| `Gagal menghubungi penyedia LLM` | Cek `LLM_BASE_URL`, koneksi internet, dan validitas key |
+| `Model tidak mengembalikan teks` | Coba model lain di `LLM_MODEL` |
+| Port dipakai | Jalankan `$env:PORT=4174; node server.js` |
+| `npm.ps1 cannot be loaded` | Tidak perlu npm; jalankan langsung `node server.js` |
+| Halaman kosong | Pastikan membuka `http://localhost:4173`, bukan file HTML langsung |

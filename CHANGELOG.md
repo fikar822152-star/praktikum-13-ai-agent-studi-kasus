@@ -2,6 +2,15 @@
 
 Semua perubahan signifikan dicatat di file ini.
 
+## [1.1.0] - 2026-11-23
+
+### Added
+- Web AI Agent tanpa dependency (`web/`): server Node.js + UI chat.
+- Pemilih 5 skill, contoh prompt, render Markdown, dan tombol salin.
+- Dukungan penyedia LLM kompatibel OpenAI (OpenAI, DeepSeek, OpenRouter, Groq, Ollama).
+- Konfigurasi `.env.example`, `start.bat`, dan panduan `web/README.md`.
+- `.gitignore` untuk `.opencode/`, `web/.env`, dan file log.
+
 ## [1.0.1] - 2026-11-23
 
 ### Changed
