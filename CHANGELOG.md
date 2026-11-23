@@ -5,7 +5,7 @@ Semua perubahan signifikan dicatat di file ini.
 ## [1.0.1] - 2026-11-23
 
 ### Changed
-- Melengkapi identitas mahasiswa dan dosen pengampu di README.
+- Melengkapi identitas mahasiswa, mata kuliah, dan dosen pengampu di README.
 - Memperbarui nama pemegang hak cipta di LICENSE.
 
 ## [1.0.0] - 2026-11-23

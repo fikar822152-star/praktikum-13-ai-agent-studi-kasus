@@ -6,7 +6,7 @@
 | --- | --- |
 | Nama | Ahmad Zulfikar |
 | NIM | C1D124022 |
-| Mata Kuliah | `[Nama Mata Kuliah]` |
+| Mata Kuliah | Managing Digital Organization |
 | Dosen Pengampu | Andy Ismail, S.Kom., M.M., MTA |
 | Topik | Praktikum #13 — Studi Kasus AI Agent |
 | Tanggal | 23 November 2026 |
@@ -165,6 +165,6 @@ Detail: [`docs/etika-dan-batasan.md`](docs/etika-dan-batasan.md).
 
 ## 9. Catatan
 
-- Nama, NIM, dan dosen pengampu telah diisi. Bila diperlukan, lengkapi kembali field **Mata Kuliah** pada tabel identitas di atas.
+- Identitas pada tabel atas sudah lengkap (nama, NIM, mata kuliah, dan dosen pengampu).
 - Seluruh konten dibuat sebagai artefak pembelajaran; tidak mengandung data pribadi nyata.
 - Lisensi: MIT — lihat [`LICENSE`](LICENSE).
