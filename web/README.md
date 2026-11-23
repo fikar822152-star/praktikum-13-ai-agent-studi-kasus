@@ -40,6 +40,15 @@ Dibuat dengan **Node.js murni tanpa dependency** — tidak perlu `npm install`.
 
 > Jangan pernah commit file `.env`. File `web/.env` sudah diabaikan oleh `.gitignore` di root repository.
 
+### Ganti model tanpa edit `.env`
+
+Setelah server berjalan, gunakan **dropdown “Model”** di kanan atas halaman. Daftar model diambil otomatis dari penyedia:
+
+- **Ollama** → semua model hasil `ollama pull` langsung muncul.
+- **OpenAI/DeepSeek/OpenRouter/Groq** → semua model pada akun tersebut muncul.
+
+Pilihan model berlaku untuk **kelima agent sekaligus** dan tersimpan sampai server dimatikan. Untuk menjadikannya permanen, ubah `LLM_MODEL` di `web/.env`.
+
 ### Rekomendasi model untuk RAM 8 GB (tanpa GPU)
 
 Mesin uji: RAM 8 GB, CPU 4 core, GPU Intel HD (shared), tanpa CUDA. Inferensi berjalan di **CPU**, sehingga model kecil lebih realistis.

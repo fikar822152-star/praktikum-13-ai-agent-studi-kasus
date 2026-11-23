@@ -21,7 +21,8 @@ loadEnvFile();
 
 const BASE_URL = (process.env.LLM_BASE_URL || 'https://api.openai.com/v1').replace(/\/+$/, '');
 const API_KEY = process.env.LLM_API_KEY || '';
-const MODEL = process.env.LLM_MODEL || 'gpt-4o-mini';
+const DEFAULT_MODEL = process.env.LLM_MODEL || 'gpt-4o-mini';
+let activeModel = DEFAULT_MODEL;
 
 const PERSONA =
   'Namamu adalah RAKA (Rekan Kerja Otomatis): rekan kerja digital yang sigap, teliti, dan membantu pekerjaan operasional. ' +
@@ -188,7 +189,7 @@ async function handleChat(req, res) {
   }
 
   const body = {
-    model: MODEL,
+    model: activeModel,
     temperature: 0.2,
     messages: [{ role: 'system', content: buildSystemPrompt(skill) }, ...messages],
   };
@@ -230,7 +231,7 @@ async function handleChat(req, res) {
       return sendJson(res, 502, { error: 'Model tidak mengembalikan teks.' });
     }
 
-    return sendJson(res, 200, { reply, model: MODEL });
+    return sendJson(res, 200, { reply, model: activeModel });
   } catch (err) {
     const message =
       err?.name === 'TimeoutError'
@@ -238,6 +239,66 @@ async function handleChat(req, res) {
         : `Gagal menghubungi penyedia LLM: ${err.message}`;
     return sendJson(res, 502, { error: message });
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* Model picker                                                        */
+/* ------------------------------------------------------------------ */
+
+async function handleModels(res) {
+  const fallback = {
+    models: [activeModel],
+    active: activeModel,
+    default: DEFAULT_MODEL,
+    source: 'config',
+  };
+
+  if (!API_KEY) {
+    return sendJson(res, 200, { ...fallback, error: 'API key belum dikonfigurasi.' });
+  }
+
+  try {
+    const upstream = await fetch(`${BASE_URL}/models`, {
+      headers: { Authorization: `Bearer ${API_KEY}` },
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (!upstream.ok) {
+      return sendJson(res, 200, { ...fallback, error: `Penyedia LLM menjawab HTTP ${upstream.status}.` });
+    }
+
+    const data = await upstream.json();
+    const ids = Array.isArray(data?.data) ? data.data.map((m) => m?.id).filter(Boolean) : [];
+
+    if (!ids.length) return sendJson(res, 200, { ...fallback, error: 'Daftar model kosong.' });
+    if (!ids.includes(activeModel)) ids.unshift(activeModel);
+
+    return sendJson(res, 200, {
+      models: ids,
+      active: activeModel,
+      default: DEFAULT_MODEL,
+      source: 'provider',
+    });
+  } catch (err) {
+    return sendJson(res, 200, { ...fallback, error: `Gagal mengambil daftar model: ${err.message}` });
+  }
+}
+
+async function handleSetModel(req, res) {
+  let payload;
+  try {
+    payload = JSON.parse(await readBody(req, 8 * 1024));
+  } catch {
+    return sendJson(res, 400, { error: 'Body JSON tidak valid.' });
+  }
+
+  const model = String(payload?.model || '').trim();
+  if (!model || model.length > 120) {
+    return sendJson(res, 400, { error: 'Nama model tidak valid.' });
+  }
+
+  activeModel = model;
+  return sendJson(res, 200, { model: activeModel, default: DEFAULT_MODEL });
 }
 
 /* ------------------------------------------------------------------ */
@@ -277,10 +338,19 @@ const server = http.createServer(async (req, res) => {
     return sendJson(res, 200, {
       ok: true,
       configured: Boolean(API_KEY),
-      model: MODEL,
+      model: activeModel,
+      defaultModel: DEFAULT_MODEL,
       baseUrl: BASE_URL,
       skills: SKILLS.length,
     });
+  }
+
+  if (url.pathname === '/api/models' && req.method === 'GET') {
+    return handleModels(res);
+  }
+
+  if (url.pathname === '/api/model' && req.method === 'POST') {
+    return handleSetModel(req, res);
   }
 
   if (url.pathname === '/api/skills' && req.method === 'GET') {
@@ -323,7 +393,7 @@ server.listen(PORT, HOST, () => {
   console.log('\n  RAKA — Rekan Kerja Otomatis');
   console.log(`  ${SKILLS.length} skill dimuat dari ${path.relative(process.cwd(), SKILLS_DIR) || SKILLS_DIR}`);
   console.log(`  Server: ${url}`);
-  console.log(`  Model : ${MODEL}`);
+  console.log(`  Model : ${activeModel}`);
   console.log(`  API   : ${API_KEY ? 'terkonfigurasi' : 'BELUM terkonfigurasi (isi web/.env)'}\n`);
 
   if (!process.env.NO_OPEN && process.stdout.isTTY) {

@@ -6,6 +6,7 @@ const state = {
   convs: {},
   pending: false,
   configured: false,
+  model: '',
 };
 
 const EXAMPLES = {
@@ -73,6 +74,7 @@ const els = {
   input: document.getElementById('input'),
   send: document.getElementById('sendBtn'),
   reset: document.getElementById('resetBtn'),
+  modelSelect: document.getElementById('modelSelect'),
 };
 
 /* ------------------------------------------------------------------ */
@@ -426,6 +428,82 @@ function grow() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Model picker                                                        */
+/* ------------------------------------------------------------------ */
+
+function updateStatus() {
+  if (!state.configured) {
+    els.status.className = 'status bad';
+    els.status.textContent =
+      'API key belum diatur. Salin web/.env.example menjadi web/.env, isi LLM_API_KEY, lalu restart server.';
+    return;
+  }
+  els.status.className = 'status ok';
+  els.status.textContent = `Siap · model ${state.model} · ${state.skills.length} skill`;
+}
+
+async function loadModels() {
+  const select = els.modelSelect;
+  try {
+    const res = await fetch('/api/models');
+    const data = await res.json();
+    const list = Array.isArray(data.models) ? data.models : [];
+
+    state.model = data.active || state.model || data.default || '';
+
+    select.innerHTML = '';
+    if (!list.length) {
+      const opt = document.createElement('option');
+      opt.value = state.model;
+      opt.textContent = state.model || 'belum ada model';
+      select.append(opt);
+      select.disabled = true;
+      return;
+    }
+
+    for (const id of list) {
+      const opt = document.createElement('option');
+      opt.value = id;
+      opt.textContent = id === data.default ? `${id} · default` : id;
+      select.append(opt);
+    }
+
+    select.value = state.model;
+    select.disabled = list.length < 2;
+    select.title = data.error
+      ? `Daftar model dari penyedia tidak tersedia (${data.error}).`
+      : 'Model berlaku untuk semua agent.';
+  } catch {
+    select.disabled = true;
+  }
+}
+
+async function changeModel(model) {
+  if (!model || model === state.model) return;
+
+  const previous = state.model;
+  els.modelSelect.disabled = true;
+  try {
+    const res = await fetch('/api/model', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `Gagal mengganti model (HTTP ${res.status}).`);
+
+    state.model = data.model;
+    updateStatus();
+  } catch (err) {
+    els.modelSelect.value = previous;
+    els.status.className = 'status bad';
+    els.status.textContent = `Gagal ganti model: ${err.message}`;
+  } finally {
+    els.modelSelect.disabled = false;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Boot                                                                */
 /* ------------------------------------------------------------------ */
 
@@ -439,6 +517,9 @@ async function boot() {
     state.skills = await skillsRes.json();
     const health = await healthRes.json();
     state.configured = Boolean(health.configured);
+    state.model = health.model || '';
+
+    await loadModels();
 
     if (!state.skills.length) {
       els.skillTitle.textContent = 'Tidak ada skill';
@@ -446,14 +527,7 @@ async function boot() {
       return;
     }
 
-    if (state.configured) {
-      els.status.className = 'status ok';
-      els.status.textContent = `Siap · model ${health.model} · ${state.skills.length} skill`;
-    } else {
-      els.status.className = 'status bad';
-      els.status.textContent =
-        'API key belum diatur. Salin web/.env.example menjadi web/.env, isi LLM_API_KEY, lalu restart server.';
-    }
+    updateStatus();
 
     selectSkill(state.skills[0].id);
   } catch (err) {
@@ -468,6 +542,8 @@ els.form.addEventListener('submit', (event) => {
 });
 
 els.input.addEventListener('input', grow);
+
+els.modelSelect.addEventListener('change', () => changeModel(els.modelSelect.value));
 
 els.input.addEventListener('keydown', (event) => {
   if (event.key === 'Enter' && !event.shiftKey) {

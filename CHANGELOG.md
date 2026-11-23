@@ -2,6 +2,12 @@
 
 Semua perubahan signifikan dicatat di file ini.
 
+## [1.3.2] - 2026-11-23
+
+### Added
+- Pemilih model di UI (`/api/models`, `/api/model`) — semua model penyedia bisa dipakai tanpa edit `.env`/restart.
+- Endpoint `/api/models` membaca daftar model langsung dari penyedia (termasuk Ollama lokal).
+
 ## [1.3.1] - 2026-11-23
 
 ### Added
