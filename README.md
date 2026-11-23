@@ -4,10 +4,10 @@
 
 | Keterangan | Isi |
 | --- | --- |
-| Nama | `[Nama Mahasiswa]` |
-| NIM | `[NIM]` |
+| Nama | Ahmad Zulfikar |
+| NIM | C1D124022 |
 | Mata Kuliah | `[Nama Mata Kuliah]` |
-| Dosen Pengampu | `[Nama Dosen]` |
+| Dosen Pengampu | Andy Ismail, S.Kom., M.M., MTA |
 | Topik | Praktikum #13 — Studi Kasus AI Agent |
 | Tanggal | 23 November 2026 |
 | Repository | `praktikum-13-ai-agent-studi-kasus` |
