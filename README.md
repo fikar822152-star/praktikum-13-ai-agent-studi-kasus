@@ -1,4 +1,4 @@
-# Praktikum #13 — Studi Kasus: Perancangan AI Agent untuk Lima Skenario Magang
+# Praktikum #13 — RAKA (Rekan Kerja Otomatis): AI Agent untuk Lima Skenario Magang
 
 > **Tugas:** Kelola AI Agent sesuai studi kasus — identifikasi *jobdesk* dan aktivitas repetitif yang bisa digantikan oleh AI Agent, buat AI Agent *skills*-nya, dan kumpulkan dalam **satu GitHub repository**.
 
@@ -11,6 +11,14 @@
 | Topik | Praktikum #13 — Studi Kasus AI Agent |
 | Tanggal | 23 November 2026 |
 | Repository | `praktikum-13-ai-agent-studi-kasus` |
+
+## Agent: RAKA (Rekan Kerja Otomatis)
+
+**RAKA** — singkatan dari **Rekan Kerja Otomatis** — adalah persona AI Agent dalam proyek ini: rekan kerja digital yang **sigap, teliti, dan siap membantu pekerjaan operasional**. Nama ini mencerminkan peran agent yang tidak menggantikan manusia, tetapi mengambil alih tugas repetitif di lima bidang: administrasi Pemda, registrasi klinik, digital marketing, HRD sawit, dan kredit bank.
+
+- **Sifat:** sigap, terstruktur, tidak mengarang data, selalu menandai ketidakpastian.
+- **Cara kerja:** menerima instruksi → menjalankan `SKILL.md` → menghasilkan **DRAFT** → manusia memverifikasi.
+- **Kalimat pembuka yang dianjurkan:** *"Saya RAKA, siap membantu. Berikut draft yang bisa Bapak/Ibu periksa."*
 
 ---
 
@@ -171,7 +179,7 @@ Detail: [`docs/etika-dan-batasan.md`](docs/etika-dan-batasan.md).
 
 ## 9. Mode Web — AI Agent Siap Pakai (Opsional)
 
-Selain dipakai sebagai *skill* di OpenCode/Claude Code, repository ini menyertakan **aplikasi web chat** yang menjalankan kelima skill.
+Selain dipakai sebagai *skill* di OpenCode/Claude Code, repository ini menyertakan **aplikasi web chat RAKA** yang menjalankan kelima skill.
 
 ```powershell
 cd web

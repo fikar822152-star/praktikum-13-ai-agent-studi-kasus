@@ -1,6 +1,6 @@
-# Web AI Agent — Praktikum #13
+# RAKA — Web AI Agent (Praktikum #13)
 
-Aplikasi web chat untuk menjalankan kelima **AI Agent Skill** dari folder `../skills/`.
+Aplikasi web chat **RAKA (Rekan Kerja Otomatis)** untuk menjalankan kelima **AI Agent Skill** dari folder `../skills/`.
 Dibuat dengan **Node.js murni tanpa dependency** — tidak perlu `npm install`.
 
 ---

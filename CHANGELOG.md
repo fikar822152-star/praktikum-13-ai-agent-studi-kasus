@@ -2,6 +2,14 @@
 
 Semua perubahan signifikan dicatat di file ini.
 
+## [1.2.0] - 2026-11-23
+
+### Changed
+- Menetapkan identitas agent menjadi **RAKA (Rekan Kerja Otomatis)**.
+- Branding web UI, judul halaman, avatar, dan label pesan memakai nama RAKA.
+- Persona RAKA ditambahkan ke system prompt web dan bagian Peran kelima `SKILL.md`.
+- Dokumentasi README dan `web/README.md` diperbarui.
+
 ## [1.1.0] - 2026-11-23
 
 ### Added

@@ -23,6 +23,10 @@ const BASE_URL = (process.env.LLM_BASE_URL || 'https://api.openai.com/v1').repla
 const API_KEY = process.env.LLM_API_KEY || '';
 const MODEL = process.env.LLM_MODEL || 'gpt-4o-mini';
 
+const PERSONA =
+  'Namamu adalah RAKA (Rekan Kerja Otomatis): rekan kerja digital yang sigap, teliti, dan membantu pekerjaan operasional. ' +
+  'Perkenalkan dirimu sebagai RAKA bila ditanya, tetapi tetap utamakan penyelesaian tugas.';
+
 const MIME = {
   '.html': 'text/html; charset=utf-8',
   '.css': 'text/css; charset=utf-8',
@@ -136,6 +140,7 @@ function buildSystemPrompt(skill) {
     : '';
 
   return [
+    PERSONA,
     'Kamu adalah AI Agent yang menjalankan skill di bawah ini secara ketat.',
     'Patuhi peran, workflow, format keluaran, dan batasan (guardrails) yang tertulis.',
     'Selalu jawab dalam Bahasa Indonesia yang jelas dan ringkas.',
@@ -315,7 +320,7 @@ server.on('error', (err) => {
 
 server.listen(PORT, HOST, () => {
   const url = `http://localhost:${PORT}`;
-  console.log('\n  AI Agent Praktikum #13');
+  console.log('\n  RAKA — Rekan Kerja Otomatis');
   console.log(`  ${SKILLS.length} skill dimuat dari ${path.relative(process.cwd(), SKILLS_DIR) || SKILLS_DIR}`);
   console.log(`  Server: ${url}`);
   console.log(`  Model : ${MODEL}`);

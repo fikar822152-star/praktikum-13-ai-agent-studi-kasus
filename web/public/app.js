@@ -274,8 +274,8 @@ function messageElement(msg) {
 
   const avatar = document.createElement('div');
   avatar.className = 'avatar';
-  avatar.textContent = msg.role === 'user' ? 'Anda' : 'AI';
-  avatar.style.fontSize = msg.role === 'user' ? '9.5px' : '11px';
+  avatar.textContent = msg.role === 'user' ? 'Anda' : 'R';
+  avatar.style.fontSize = msg.role === 'user' ? '9.5px' : '13px';
 
   const bubble = document.createElement('div');
   bubble.className = 'bubble';
@@ -288,8 +288,8 @@ function messageElement(msg) {
       : msg.role === 'error'
         ? 'Kesalahan'
         : activeSkill()
-          ? skillTitle(activeSkill())
-          : 'AI Agent';
+          ? `RAKA · ${skillTitle(activeSkill())}`
+          : 'RAKA';
 
   const content = document.createElement('div');
   if (msg.role === 'assistant') {
@@ -336,7 +336,7 @@ function renderMessages() {
     strong.textContent = 'Mulai percakapan';
     const p = document.createElement('p');
     p.textContent =
-      'Pilih salah satu contoh di bawah atau tulis instruksi Anda. Agent akan menjawab sebagai DRAFT yang perlu diverifikasi.';
+      'Pilih salah satu contoh di bawah atau tulis instruksi Anda. RAKA akan menjawab sebagai DRAFT yang perlu diverifikasi.';
     empty.append(strong, p);
     els.messages.append(empty);
   }
@@ -354,7 +354,8 @@ function renderMessages() {
     wrap.className = 'msg assistant';
     const avatar = document.createElement('div');
     avatar.className = 'avatar';
-    avatar.textContent = 'AI';
+    avatar.textContent = 'R';
+    avatar.style.fontSize = '13px';
     wrap.append(avatar, bubble);
     els.messages.append(wrap);
   }
