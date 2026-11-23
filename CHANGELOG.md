@@ -2,6 +2,13 @@
 
 Semua perubahan signifikan dicatat di file ini.
 
+## [1.3.0] - 2026-11-23
+
+### Changed
+- Mengembalikan judul resmi tugas sebagai H1 README.
+- Menempatkan RAKA sebagai **identitas/persona pelengkap**, bukan pengganti ketentuan tugas.
+- Menambahkan tabel **Kesesuaian dengan Ketentuan Tugas** untuk memudahkan penilaian.
+
 ## [1.2.0] - 2026-11-23
 
 ### Changed

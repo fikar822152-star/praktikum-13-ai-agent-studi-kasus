@@ -1,6 +1,8 @@
-# Praktikum #13 — RAKA (Rekan Kerja Otomatis): AI Agent untuk Lima Skenario Magang
+# Praktikum #13 — Studi Kasus: Perancangan AI Agent untuk Lima Skenario Magang
 
 > **Tugas:** Kelola AI Agent sesuai studi kasus — identifikasi *jobdesk* dan aktivitas repetitif yang bisa digantikan oleh AI Agent, buat AI Agent *skills*-nya, dan kumpulkan dalam **satu GitHub repository**.
+>
+> **Nama Agent (persona):** **RAKA — Rekan Kerja Otomatis**. Nama ini merupakan identitas produk/persona, **bukan penggantian** judul, cakupan, atau kelima skenario tugas.
 
 | Keterangan | Isi |
 | --- | --- |
@@ -12,13 +14,30 @@
 | Tanggal | 23 November 2026 |
 | Repository | `praktikum-13-ai-agent-studi-kasus` |
 
-## Agent: RAKA (Rekan Kerja Otomatis)
+## Identitas Agent (Pelengkap)
 
 **RAKA** — singkatan dari **Rekan Kerja Otomatis** — adalah persona AI Agent dalam proyek ini: rekan kerja digital yang **sigap, teliti, dan siap membantu pekerjaan operasional**. Nama ini mencerminkan peran agent yang tidak menggantikan manusia, tetapi mengambil alih tugas repetitif di lima bidang: administrasi Pemda, registrasi klinik, digital marketing, HRD sawit, dan kredit bank.
 
 - **Sifat:** sigap, terstruktur, tidak mengarang data, selalu menandai ketidakpastian.
 - **Cara kerja:** menerima instruksi → menjalankan `SKILL.md` → menghasilkan **DRAFT** → manusia memverifikasi.
 - **Kalimat pembuka yang dianjurkan:** *"Saya RAKA, siap membantu. Berikut draft yang bisa Bapak/Ibu periksa."*
+
+> Catatan: seluruh **ketentuan tugas tetap utuh**. RAKA hanya nama persona; kelima skenario, analisis jobdesk, aktivitas repetitif, dan skill-nya tidak diubah atau dikurangi.
+
+## Kesesuaian dengan Ketentuan Tugas
+
+| Ketentuan tugas | Status | Dipenuhi di |
+| --- | --- | --- |
+| Magang di administrasi perkantoran Pemda | ✅ | README §1 · `docs/analisis-jobdesk-ai.md` · `skills/admin-perkantoran-pemda/` |
+| Magang di klinik dokter (registrasi & anamnesa) | ✅ | README §1 · `docs/analisis-jobdesk-ai.md` · `skills/registrasi-anamnesa-klinik/` |
+| Magang di digital marketing agency | ✅ | README §1 · `docs/analisis-jobdesk-ai.md` · `skills/digital-marketing-agency/` |
+| Magang di perusahaan sawit (HRD) | ✅ | README §1 · `docs/analisis-jobdesk-ai.md` · `skills/hrd-perusahaan-sawit/` |
+| Magang di bank (bagian kredit) | ✅ | README §1 · `docs/analisis-jobdesk-ai.md` · `skills/kredit-bank/` |
+| Identifikasi **jobdesk** | ✅ | `docs/analisis-jobdesk-ai.md` — subbagian *Jobdesk* tiap skenario |
+| Identifikasi **aktivitas repetitif** yang bisa digantikan AI Agent | ✅ | `docs/analisis-jobdesk-ai.md` — tabel *Aktivitas Repetitif → AI Agent* · README §3 |
+| Membuat **AI Agent skills** | ✅ | 5 folder `skills/*/SKILL.md` + `references/` |
+| Dikumpulkan dalam **satu repository GitHub** | ✅ | https://github.com/fikar822152-star/praktikum-13-ai-agent-studi-kasus |
+| *Tambahan (nilai plus):* demo web yang menjalankan kelima skill | ➕ | Folder `web/` |
 
 ---
 
