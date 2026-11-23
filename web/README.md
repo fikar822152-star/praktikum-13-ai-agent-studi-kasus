@@ -40,6 +40,19 @@ Dibuat dengan **Node.js murni tanpa dependency** — tidak perlu `npm install`.
 
 > Jangan pernah commit file `.env`. File `web/.env` sudah diabaikan oleh `.gitignore` di root repository.
 
+### Rekomendasi model untuk RAM 8 GB (tanpa GPU)
+
+Mesin uji: RAM 8 GB, CPU 4 core, GPU Intel HD (shared), tanpa CUDA. Inferensi berjalan di **CPU**, sehingga model kecil lebih realistis.
+
+| RAM bebas | Model | Unduhan | Perkiraan RAM | Catatan |
+| --- | --- | --- | --- | --- |
+| ±2 GB | `llama3.2:1b` | ±1,3 GB | ±1,5 GB | paling cepat, kualitas dasar |
+| ±3 GB | `qwen2.5:1.5b` | ±1,0 GB | ±2 GB | **disarankan** — seimbang |
+| ±5 GB | `qwen2.5:3b` | ±2,0 GB | ±3 GB | kualitas lebih baik, lebih lambat |
+| ≥8 GB | `qwen2.5:7b` | ±4,7 GB | ±6 GB | **tidak disarankan** di mesin ini |
+
+> Tutup aplikasi berat (browser banyak tab, OneDrive syncing) sebelum menjalankan model. Tanpa GPU NVIDIA, kecepatan 1.5B sekitar 10–20 token/detik dan 3B sekitar 5–10 token/detik — cukup untuk tugas draft, bukan percakapan panjang.
+
 ---
 
 ## 3. Menjalankan
