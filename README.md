@@ -165,6 +165,6 @@ Detail: [`docs/etika-dan-batasan.md`](docs/etika-dan-batasan.md).
 
 ## 9. Catatan
 
-- Isi identitas pada tabel atas dengan data diri sebelum dikumpulkan.
+- Nama, NIM, dan dosen pengampu telah diisi. Bila diperlukan, lengkapi kembali field **Mata Kuliah** pada tabel identitas di atas.
 - Seluruh konten dibuat sebagai artefak pembelajaran; tidak mengandung data pribadi nyata.
 - Lisensi: MIT — lihat [`LICENSE`](LICENSE).
