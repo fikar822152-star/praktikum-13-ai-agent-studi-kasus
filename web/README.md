@@ -78,6 +78,15 @@ Untuk model lain:
 powershell -ExecutionPolicy Bypass -File .\setup-ollama.ps1 -Model qwen2.5:3b
 ```
 
+### Menjalankan cepat (Windows)
+
+```powershell
+cd web
+powershell -ExecutionPolicy Bypass -File .\start-raka.ps1
+```
+
+Skrip menyalakan Ollama bila belum aktif, menampilkan model yang tersedia, lalu menjalankan server RAKA.
+
 ---
 
 ## 3. Menjalankan

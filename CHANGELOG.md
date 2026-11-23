@@ -7,6 +7,8 @@ Semua perubahan signifikan dicatat di file ini.
 ### Added
 - Pemilih model di UI (`/api/models`, `/api/model`) — semua model penyedia bisa dipakai tanpa edit `.env`/restart.
 - Endpoint `/api/models` membaca daftar model langsung dari penyedia (termasuk Ollama lokal).
+- `web/start-raka.ps1` — menyalakan Ollama + server RAKA dalam satu perintah.
+- Pesan error yang lebih jelas untuk model belum diunduh / Ollama tidak aktif.
 
 ## [1.3.1] - 2026-11-23
 

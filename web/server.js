@@ -218,7 +218,7 @@ async function handleChat(req, res) {
 
     if (!upstream.ok) {
       return sendJson(res, 502, {
-        error: data?.error?.message || `Upstream error (HTTP ${upstream.status}).`,
+        error: friendlyUpstreamError(data?.error?.message || `Upstream error (HTTP ${upstream.status}).`),
       });
     }
 
@@ -239,6 +239,19 @@ async function handleChat(req, res) {
         : `Gagal menghubungi penyedia LLM: ${err.message}`;
     return sendJson(res, 502, { error: message });
   }
+}
+
+function friendlyUpstreamError(message) {
+  if (/not found, try pulling it first/i.test(message)) {
+    return `Model "${activeModel}" belum terunduh. Jalankan di terminal: ollama pull ${activeModel}`;
+  }
+  if (/connection refused|ECONNREFUSED|fetch failed/i.test(message)) {
+    return `Tidak bisa menghubungi ${BASE_URL}. Bila memakai Ollama, pastikan aplikasinya berjalan (ollama serve).`;
+  }
+  if (/does not support tools|context length/i.test(message)) {
+    return `${message} — coba model lain lewat dropdown Model di kanan atas.`;
+  }
+  return message;
 }
 
 /* ------------------------------------------------------------------ */
