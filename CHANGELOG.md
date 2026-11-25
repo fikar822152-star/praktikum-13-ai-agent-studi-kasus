@@ -10,6 +10,9 @@ Semua perubahan signifikan dicatat di file ini.
 - `web/start-raka.ps1` — menyalakan Ollama + server RAKA dalam satu perintah.
 - Pesan error yang lebih jelas untuk model belum diunduh / Ollama tidak aktif.
 
+### Tested
+- Ollama 0.5.7 + `qwen2.5:1.5b` (CPU, RAM 8 GB): kelima skill menjawab, 32–59 detik per jawaban.
+
 ## [1.3.1] - 2026-11-23
 
 ### Added

@@ -114,6 +114,20 @@ Ubah ke format SOAP dan tandai bagian yang perlu diverifikasi dokter.
 
 Keluaran yang diharapkan: format SOAP dengan `S:` berisi keluhan, `O:` berisi tanda vital (kosong → ditandai), `A:` bertanda `[PERLU VERIFIKASI DOKTER]`, `P:` berisi rencana pemeriksaan, bukan resep.
 
+### 5.1 Uji dengan model lokal (Ollama)
+
+Lingkungan uji: Windows, RAM 8 GB, CPU 4 core (tanpa GPU), Ollama 0.5.7, model `qwen2.5:1.5b` (986 MB).
+
+| Skill | Waktu jawab | Catatan |
+| --- | --- | --- |
+| `admin-perkantoran-pemda` | ±43 s | daftar tugas terstruktur, sesuai peran |
+| `registrasi-anamnesa-klinik` | ±44 s | format SOAP + `[PERLU VERIFIKASI DOKTER]` muncul |
+| `digital-marketing-agency` | ±32 s | caption jadi, emoji terbatas pada model kecil |
+| `hrd-perusahaan-sawit` | ±59 s | pertanyaan interview relevan |
+| `kredit-bank` | ±36 s | angka terbaca, istilah DSR perlu dikoreksi manusia |
+
+Kesimpulan: model 1.5B cukup untuk **draft terstruktur**, tetapi kualitas bahasa dan istilah teknis perlu diverifikasi. Untuk mutu lebih baik gunakan `qwen2.5:3b` bila RAM lega.
+
 ---
 
 ## 6. Pemecahan Masalah

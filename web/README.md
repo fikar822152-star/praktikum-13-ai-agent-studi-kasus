@@ -62,6 +62,18 @@ Mesin uji: RAM 8 GB, CPU 4 core, GPU Intel HD (shared), tanpa CUDA. Inferensi be
 
 > Tutup aplikasi berat (browser banyak tab, OneDrive syncing) sebelum menjalankan model. Tanpa GPU NVIDIA, kecepatan 1.5B sekitar 10–20 token/detik dan 3B sekitar 5–10 token/detik — cukup untuk tugas draft, bukan percakapan panjang.
 
+**Hasil uji nyata di mesin ini** (Ollama 0.5.7 + `qwen2.5:1.5b`, CPU saja):
+
+| Skill | Waktu jawab |
+| --- | --- |
+| Admin Perkantoran Pemda | ±43 detik |
+| Registrasi & Anamnesa Klinik | ±44 detik |
+| Digital Marketing Agency | ±32 detik |
+| HRD Perusahaan Sawit | ±59 detik |
+| Kredit Bank | ±36 detik |
+
+Jawaban tetap berlabel DRAFT dan sering butuh koreksi istilah; gunakan `qwen2.5:3b` bila ingin mutu lebih baik dan RAM mencukupi.
+
 ### Skrip setup otomatis
 
 Setelah Ollama terpasang, dari folder `web/`:
